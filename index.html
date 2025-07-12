@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Himalaya Fortune Wheel - Lucky Draw</title>
+
+    <!-- Meta Description -->
+    <meta name="description"
+          content="Experience the excitement of Himalaya Fortune Wheel! An interactive lucky draw spinner for Himalaya Darshan College students. Discover your lucky number and find your fortune with our modern 3-wheel spinner system." />
+    <meta name="keywords"
+          content="lucky draw, spinner wheel, Himalaya Darshan College, fortune wheel, student lottery, random picker, college events" />
+    <meta name="author" content="Himalaya Darshan College" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://spinner.himalayacollege.edu.np/" />
+    <meta property="og:title"
+          content="Himalaya Fortune Wheel - Interactive Lucky Draw Spinner" />
+    <meta property="og:description"
+          content="Join the excitement! Spin the Himalaya Fortune Wheel and discover your lucky number. An innovative 3-wheel spinner system designed for Himalaya Darshan College students and events." />
+    <meta property="og:image"
+          content="https://spinner.himalayacollege.edu.np/banner.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"
+          content="Himalaya Fortune Wheel - Lucky Draw Spinner with college logo" />
+    <meta property="og:site_name" content="Himalaya Darshan College" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url"
+          content="https://spinner.himalayacollege.edu.np/" />
+    <meta property="twitter:title"
+          content="Himalaya Fortune Wheel - Interactive Lucky Draw Spinner" />
+    <meta property="twitter:description"
+          content="Spin the wheel and find your fortune! Modern 3-wheel spinner system for Himalaya Darshan College events." />
+    <meta property="twitter:image"
+          content="https://spinner.himalayacollege.edu.np/banner.jpg" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#00529C" />
+    <meta name="msapplication-TileColor" content="#00529C" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./banner.jpg" />
+    <link rel="apple-touch-icon" href="./banner.jpg" />
+
+    <link rel="stylesheet" href="./style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="college-header">
+        <div class="header-content">
+            <div class="header-main">
+                <div class="college-logo-section">
+                    <div class="logo-container">
+                        <img src="./hdclogo.jpg"
+                             alt="Himalaya Darshan College Logo"
+                             class="logo-image" />
+                    </div>
+                    <div class="college-info">
+                        <!--<h1 class="college-name">Himalaya Fortune Wheel</h1>-->
+
+                        <h1 class="college-name">Graduation Ceremony - 2082</h1>
+                        <p class="college-tagline">
+                            Himalaya Fortune Spinner
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="spinner-section">
+            <div class="spinner-group">
+                <div class="spinner-wrapper">
+                    <div class="spinner-container">
+                        <canvas id="spinnerCanvas1" width="280" height="280"></canvas>
+                        <div class="pointer"></div>
+                    </div>
+                    <!--<div class="spinner-label"></div>-->
+                    <div class="spinner-label">First Digit</div>
+                </div>
+                <div class="spinner-wrapper">
+                    <div class="spinner-container">
+                        <canvas id="spinnerCanvas2" width="280" height="280"></canvas>
+                        <div class="pointer"></div>
+                    </div>
+                    <!--<div class="spinner-label"></div>-->
+                    <div class="spinner-label">Second Digit</div>
+                </div>
+                <div class="spinner-wrapper">
+                    <div class="spinner-container">
+                        <canvas id="spinnerCanvas3" width="280" height="280"></canvas>
+                        <div class="pointer"></div>
+                    </div>
+                    <!--<div class="spinner-label"></div>-->
+                    <div class="spinner-label">Third Digit</div>
+                </div>
+                <input type="number"
+                       id="studentCount"
+                       min="1"
+                       max="999"
+                       value="105"
+                       placeholder="Enter number"
+                       hidden="hidden" />
+            </div>
+        </div>
+
+
+
+        <!-- Hidden result div for backward compatibility -->
+        <div id="result" class="hidden">
+            <h2>Congratulations!</h2>
+            <p>The winner is student number: <span id="winnerNumber"></span></p>
+        </div>
+
+        <audio id="cheerSound" src="cheer.mp3" preload="auto"></audio>
+        <audio id="spinSound" src="krrrrr.mp3" preload="auto" loop></audio>
+    </main>
+    <div class="control-panel"">
+        <div class="input-section">
+            <div class="input-group" style="width:100%; display:flex; justify-content:center; align-items:center;">
+
+                <button id="startButton" class="spin-button">
+                    <i class="fas fa-play"></i>
+                    <span>Start Fortune Wheel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Winner Modal Popup -->
+    <div id="winnerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="trophy-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2>🎉 Congratulations! 🎉</h2>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="winner-card">
+                    <div class="winner-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Lucky Winner</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="winner-number-display">
+                        <span class="winner-label">Student Number</span>
+                        <span id="modalWinnerNumber" class="winner-number">000</span>
+                    </div>
+                    <div class="winner-message">
+                        <p>🌟 You are the chosen one from Himalaya Darshan College! 🌟</p>
+                        <p class="fortune-text">
+                            May the peaks of success be yours to conquer!
+                        </p>
+                    </div>
+                    <div class="college-seal">
+                        <i class="fas fa-mountain"></i>
+                        <span>Himalaya Darshan College</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="newDrawButton" class="new-draw-btn">
+                    <i class="fas fa-redo"></i>
+                    New Draw
+                </button>
+                <button id="closeModalBtn" class="close-btn">
+                    <i class="fas fa-check"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="confetti-container"></div>
+    <script src="./script.js"></script>
+</body>
+</html>
